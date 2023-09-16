@@ -1,0 +1,112 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<!-- Bootstrap CSS -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+
+	<title>Employee Directory</title>
+
+</head>
+
+<body>
+	<header class="p-3 text-bg-dark">
+		<div class="container">
+			<div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+<!--				<a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">-->
+<!--					<svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"/></svg>-->
+<!--				</a>-->
+
+				<ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+					<li><a href="#" class="nav-link  text-white">Employee Directory</a></li>
+<!--					<li><a href="#" class="nav-link px-2 text-white">Add Employee</a></li>-->
+	<!--				<li><a href="#" class="nav-link px-2 text-white">Pricing</a></li>-->
+	<!--				<li><a href="#" class="nav-link px-2 text-white">FAQs</a></li>-->
+	<!--				<li><a href="#" class="nav-link px-2 text-white">About</a></li>-->
+				</ul>
+
+				<form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
+					<input type="search" th:value="${search}" id="search-input" class="form-control form-control-dark text-bg-dark" placeholder="Search by first name" aria-label="Search">
+				</form>
+
+				<div class="text-end">
+					<button class="btn btn-outline-light me-2"
+							id="btn-login" th:if="${isLogin} == false" type="button" onclick="login()">Login</button>
+					<button class="btn btn-outline-light me-2"
+							id="btn-loginOut" th:if="${isLogin}" onclick="logout()" type="button">Logout</button>
+					<button type="button" th:if="${isLogin} == false"  id="btn-register" class="btn btn-warning">Sign-up</button>
+				</div>
+			</div>
+		</div>
+	</header>
+	<div class="container">
+		<!--	button to add new employee-->
+
+				<a th:href="@{/employees/showFormForAdd}" class="btn btn-primary btn-sm mb-3 fs-5 mt-3">Add Employee</a>
+
+			<table class="table table-bordered table-striped">
+				<thead class="table-dark">
+					<tr>
+						<th>First Name</th>
+						<th>Last Name</th>
+						<th>Email</th>
+						<th>Action</th>
+					</tr>
+				</thead>
+
+				<tbody>
+					<tr th:each="tempEmployee : ${employees}">
+
+						<td th:text="${tempEmployee.firstName}" />
+						<td th:text="${tempEmployee.lastName}" />
+						<td th:text="${tempEmployee.email}" />
+						<!--Update button-->
+						<td>
+							<a th:href="@{/employees/showFormForUpdate(employeeId=${tempEmployee.id})}"
+								class="btn btn-info btn-sm">
+								Update
+							</a>
+
+							<!--Delete button-->
+							<a th:href="@{/employees/delete(employeeId=${tempEmployee.id})}"
+								class="btn btn-danger btn-sm"
+								onclick="if (!(confirm('Are you sure you want to delete this employee?'))) return false">
+								Delete
+							</a>
+						</td>
+
+					</tr>
+				</tbody>
+			</table>
+
+	</div>
+	<script>
+			const mySearch = document.getElementById("search-input");
+
+			// 2. Attach an onchange event handler
+			mySearch.onchange = function() {
+				// 3. Define the behavior when the input value changes
+				const inputValue = mySearch.value;
+				console.log(inputValue);
+
+				window.location.href = "http://localhost:8080/employees/search?keyword="+inputValue;
+
+			};
+
+			function login(){
+				window.location.href = "http://localhost:8080/";
+			}
+
+			function logout(){
+				window.location.href = "http://localhost:8080/logout";
+			}
+
+	</script>
+</body>
+
+</html>
