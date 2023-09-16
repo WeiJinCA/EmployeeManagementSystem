@@ -1,6 +1,6 @@
 # EmployeeManagementSystem
 
-This system is a simple demo about CRUD operations of employee data.  
+It is a simple demo about CRUD operations of employee data.  
 
 # Tech Stack
 Java
