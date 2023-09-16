@@ -1,2 +1,8 @@
 # EmployeeManagementSystem
-This employee management system is baesd on Spring Boot to Implement CRUD functions. MySQL is used to fecth employee data.
+
+This system is a simple demo about CRUD operations of employee data.  
+
+# Technology Stack   
+- Front-end: Thymeleaf   
+- Backend: Spring Boot  
+- Database: MySQL  
